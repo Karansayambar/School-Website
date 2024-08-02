@@ -1,17 +1,20 @@
 import Navbar from '../components/Navbar'
-import CarouselPage from '../components/CarouselPage'
-import AboutPage from './AboutPage'
-import GalleryPage from './GalleryPage'
-import FacultyPage from './FacultyPage'
-import ContactPage from './ContactPage'
-import StudentsPage from './StudentsPage'
-import CurriculumPage from './CurriculumPage'
-import AdmissionsPage from './AdmissionPage'
+import React, { Suspense } from 'react'
 
 const HomePage = () => {
+  const AboutPage = React.lazy(() => import('./AboutPage'));
+  const CarouselPage = React.lazy(() => import('../components/CarouselPage'));
+  const GalleryPage = React.lazy(() => import('./GalleryPage'));
+  const ContactPage = React.lazy(() => import("./ContactPage"));
+  const StudentsPage = React.lazy(() => import("./StudentsPage"));
+  const CurriculumPage = React.lazy(() => import("./CurriculumPage"));
+  const AdmissionsPage = React.lazy(() => import("./AdmissionPage"));
+  const FacultyPage = React.lazy(() => import("./FacultyPage"));
+
   return (
     <div className='bg-slate-300'>
         <Navbar/>
+         <Suspense fallback={<div>...Loading</div>}>
         <section id='home'>
           <CarouselPage/>
         </section>
@@ -36,6 +39,7 @@ const HomePage = () => {
         <section id='contact'>
           <ContactPage/>
         </section>
+        </Suspense>
         
     </div>
   )
